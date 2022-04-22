@@ -1,1 +1,1 @@
-# progress-interview-react-applicatin
+# progress-interview-kendo-react-applicatin

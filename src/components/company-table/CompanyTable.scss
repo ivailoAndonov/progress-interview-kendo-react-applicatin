@@ -1,4 +1,4 @@
-@use "src/assets/styles/variables";
+@use "src/assets/styles/utils/variables";
 
 .CompanyTable--dark {
   width: 100%;
@@ -24,24 +24,5 @@
   &__cell {
     padding: 10px 0;
     height: 40px;
-  }
-}
-
-.border {
-  &--r {
-    border-right-style: solid;
-    border-right-color: variables.$border-color;
-  }
-  &--l {
-    border-left-style: solid;
-    border-left-color: variables.$border-color;
-  }
-  &--t {
-    border-top-style: solid;
-    border-top-color: variables.$border-color;
-  }
-  &--b {
-    border-bottom-style: solid;
-    border-bottom-color: variables.$border-color;
   }
 }

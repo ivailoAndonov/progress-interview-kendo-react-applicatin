@@ -34,23 +34,23 @@ const grids = (items: any[]) =>
         key={index}
       >
         <div style={{ border: "1px solid gray", flex: 1, padding: "20px 0" }}>
-          <span>{index}</span>
+          <span>{data.id}</span>
         </div>
         <div style={{ border: "1px solid gray", flex: 1, padding: "20px 0" }}>
           <span>{data.name}</span>
         </div>
         <div style={{ border: "1px solid gray", flex: 1, padding: "20px 0" }}>
-          <span>{data.name}</span>
+          <span>{data.date.toString()}</span>
         </div>
         <div style={{ border: "1px solid gray", flex: 1, padding: "20px 0" }}>
-          <span>{data.name}</span>
+          <span>{data.revenue}</span>
         </div>
         <div style={{ border: "1px solid gray", flex: 1, padding: "20px 0" }}>
-          <span>{data.name}</span>
+          <span>{data.change}</span>
         </div>
         <div style={{ border: "1px solid gray", flex: 1, padding: "20px 0" }}>
           <span>
-            <Switch value={true} id={index} />
+            <Switch value={data.done} id={data.id} />
           </span>
         </div>
       </div>

@@ -1,8 +1,9 @@
 import { useContext } from "react"
 import { AppContext } from "../../utils/app-context"
-import VirtualScroll, { Switch } from "./VirtualScroll"
+import VirtualScroll, { Switch } from "../virtual-scroll/VirtualScroll"
 
-import "./CompanyTable.css"
+import "./CompanyTable.scss"
+import "../../assets/styles/grid.scss"
 
 function CompanyTable() {
   const appContext = useContext(AppContext)
@@ -33,39 +34,36 @@ function CompanyTable() {
 
   return (
     <>
-      {/* <table className={`CompanyTable--${appContext.theme}`}> */}
       <div
-        className={`CompanyTable__header CompanyTable__header--${appContext.theme}`}
+        className={`TableHeader TableHeader__row--border CompanyTable--${appContext.theme}`}
       >
-        <div className="CompanyTable__row">
-          <div>
-            <div>Company</div>
-            <div className="CompanyTable__row">
-              <div>id</div>
-              <div>Name</div>
+        <div className="TableHeader__row">
+          <div className="col-2 border--r">
+            <div className="TableHeader__cell border--b">Company</div>
+            <div className="TableHeader__row">
+              <div className="TableHeader__cell col-2 border--r">id</div>
+              <div className="TableHeader__cell col-2">Name</div>
             </div>
           </div>
-          <div>Date</div>
-          <div>
-            <div>Finance</div>
-            <div className="CompanyTable__row">
-              <div>Revenue</div>
-              <div>YoY change</div>
+          <div className="TableHeader__cell col-1">Date</div>
+          <div className="col-2 border--l">
+            <div className="TableHeader__cell border--b">Finance</div>
+            <div className="TableHeader__row">
+              <div className="TableHeader__cell col-2 border--r">Revenue</div>
+              <div className="TableHeader__cell col-2">YoY change</div>
             </div>
           </div>
-          <div>
-            <div>Done</div>
-            <div>
+          <div className="col-1 border--l">
+            <div className="TableHeader__cell border--b">Done</div>
+            <div className="TableHeader__cell">
               {/* <Switch /> */}
               switch
             </div>
           </div>
         </div>
       </div>
-      {/* </table> */}
       <VirtualScroll
         totalElements={20}
-        rowHeight={70}
         items={companyList}
         visibleItemsLength={5}
       ></VirtualScroll>

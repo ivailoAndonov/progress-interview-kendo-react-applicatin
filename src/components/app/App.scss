@@ -1,0 +1,28 @@
+@use "src/assets/styles/variables";
+
+.App {
+  text-align: center;
+  width: 100%;
+  height: 100vh;
+  padding: 10px 20px;
+
+  &--light {
+    color: map-get(variables.$light-theme, "color");
+    background-color: map-get(variables.$light-theme, "background-color");
+  }
+  &--dark {
+    color: map-get(variables.$dark-theme, "color");
+    background-color: map-get(variables.$dark-theme, "background-color");
+  }
+
+  &__table-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+  }
+
+  &__header {
+    text-align: center;
+    margin: 0 0 20px;
+  }
+}

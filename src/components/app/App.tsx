@@ -15,7 +15,7 @@ import {
 import CompanyTable from "../company-table/CompanyTable"
 import Select from "../select/Select"
 
-import "./App.css"
+import "./App.scss"
 
 function App() {
   const currentTheme = getLocalTheme() || DEFAULT_THEME
@@ -36,7 +36,7 @@ function App() {
 
   return (
     <AppContext.Provider value={{ theme, locale }}>
-      <div className={`App--${theme}`}>
+      <div className={`App App--${theme}`}>
         <header className="App__header">Ivaylo interview task</header>
         <div className="App__table-navigation">
           <Select

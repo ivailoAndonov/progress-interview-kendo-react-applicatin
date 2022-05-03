@@ -25,20 +25,30 @@ const grids = (items: any[]) =>
     return (
       <div
         style={{
-          height: "70px",
-          display: "table",
-          tableLayout: "fixed",
+          height: "60px",
+          // display: "table",
+          // tableLayout: "fixed",
+          display: "flex",
           width: "100%",
         }}
         key={index}
       >
-        <div style={{ border: "1px solid red" }}>
+        <div style={{ border: "1px solid gray", flex: 1, padding: "20px 0" }}>
           <span>{index}</span>
         </div>
-        <div style={{ border: "1px solid red" }}>
+        <div style={{ border: "1px solid gray", flex: 1, padding: "20px 0" }}>
           <span>{data.name}</span>
         </div>
-        <div>
+        <div style={{ border: "1px solid gray", flex: 1, padding: "20px 0" }}>
+          <span>{data.name}</span>
+        </div>
+        <div style={{ border: "1px solid gray", flex: 1, padding: "20px 0" }}>
+          <span>{data.name}</span>
+        </div>
+        <div style={{ border: "1px solid gray", flex: 1, padding: "20px 0" }}>
+          <span>{data.name}</span>
+        </div>
+        <div style={{ border: "1px solid gray", flex: 1, padding: "20px 0" }}>
           <span>
             <Switch value={true} id={index} />
           </span>
@@ -48,7 +58,7 @@ const grids = (items: any[]) =>
   })
 
 interface VirtualScrollProps {
-  rowHeight: number
+  // rowHeight: number
   totalElements: number
   items: any[]
   visibleItemsLength: number
@@ -58,11 +68,12 @@ const VirtualScroll: FC<VirtualScrollProps> = (props) => {
   const [scrollTop, setScrollTop] = useState(0)
   const scrollEle = useRef<HTMLDivElement | any>(null)
 
-  const totalHeight = props.rowHeight * props.totalElements
-  const startNodeEl = Math.max(0, Math.floor(scrollTop / props.rowHeight))
+  const rowHeight = 60
+  const totalHeight = rowHeight * props.totalElements
+  const startNodeEl = Math.max(0, Math.floor(scrollTop / rowHeight))
   const visibleItems = grids(props.items).slice(
     startNodeEl,
-    startNodeEl + props.visibleItemsLength
+    startNodeEl + (props.visibleItemsLength + 2)
   )
   const scroll = () => {
     setScrollTop(scrollEle.current.scrollTop)
@@ -77,8 +88,11 @@ const VirtualScroll: FC<VirtualScrollProps> = (props) => {
     <div
       ref={scrollEle}
       style={{
-        height: props.rowHeight * (props.visibleItemsLength - 2) + "px",
+        height: rowHeight * props.visibleItemsLength + "px",
         overflowY: "scroll",
+        padding: "0 4px",
+        border: "1px solid gray",
+        borderTop: "transparent",
       }}
     >
       <div
@@ -87,7 +101,7 @@ const VirtualScroll: FC<VirtualScrollProps> = (props) => {
       >
         <div
           style={{
-            transform: `translateY(${startNodeEl * props.rowHeight}px)`,
+            transform: `translateY(${startNodeEl * rowHeight}px)`,
           }}
         >
           {visibleItems}

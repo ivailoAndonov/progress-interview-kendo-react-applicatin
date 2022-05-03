@@ -1,0 +1,47 @@
+@use "src/assets/styles/variables";
+
+.CompanyTable--dark {
+  width: 100%;
+}
+.CompanyTable--light {
+  width: 100%;
+}
+
+.TableHeader {
+  padding: 6px 4px 0 4px;
+  background-color: #d3d3d3;
+  color: map-get(variables.$light-theme, "color");
+
+  &__row {
+    display: flex;
+    align-items: center;
+
+    &--border {
+      border: 1.5px solid variables.$border-color;
+    }
+  }
+
+  &__cell {
+    padding: 10px 0;
+    height: 40px;
+  }
+}
+
+.border {
+  &--r {
+    border-right-style: solid;
+    border-right-color: variables.$border-color;
+  }
+  &--l {
+    border-left-style: solid;
+    border-left-color: variables.$border-color;
+  }
+  &--t {
+    border-top-style: solid;
+    border-top-color: variables.$border-color;
+  }
+  &--b {
+    border-bottom-style: solid;
+    border-bottom-color: variables.$border-color;
+  }
+}

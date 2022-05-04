@@ -1,36 +1,15 @@
+import VirtualScroll from "../virtual-scroll/VirtualScroll"
+import Switch from "../switch/Switch"
+
 import { useContext } from "react"
 import { AppContext } from "../../utils/app-context"
-import VirtualScroll, { Switch } from "../virtual-scroll/VirtualScroll"
-import { getCompanyList } from "../../utils/company-data"
+import companyData from "../../utils/company-data"
 
 import "./CompanyTable.scss"
 
 function CompanyTable() {
   const appContext = useContext(AppContext)
-  const companyList = getCompanyList(20)
-
-  // const companyList = [
-  //   { name: "company 1" },
-  //   { name: "company 2" },
-  //   { name: "company 3" },
-  //   { name: "company 4" },
-  //   { name: "company 5" },
-  //   { name: "company 6" },
-  //   { name: "company 7" },
-  //   { name: "company 8" },
-  //   { name: "company 9" },
-  //   { name: "company 10" },
-  //   { name: "company 11" },
-  //   { name: "company 12" },
-  //   { name: "company 13" },
-  //   { name: "company 14" },
-  //   { name: "company 15" },
-  //   { name: "company 16" },
-  //   { name: "company 17" },
-  //   { name: "company 18" },
-  //   { name: "company 19" },
-  //   { name: "company 20" },
-  // ]
+  const companyList = companyData.getCompanyList(20)
 
   return (
     <>

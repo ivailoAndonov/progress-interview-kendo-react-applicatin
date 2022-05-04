@@ -1,26 +1,7 @@
 import React, { FC, useRef, useState, useEffect, ReactElement } from "react"
+import Switch from "../switch/Switch"
 
-type switchProps = {
-  value: boolean
-  id: number
-}
-
-export const Switch: FC<switchProps> = (props) => {
-  const handleChange = (event: any) => console.log(event.target.value)
-  return (
-    <label>
-      <input
-        type="checkbox"
-        value={props.id}
-        onChange={handleChange}
-        checked={props.value}
-      />
-      <span>kur</span>
-    </label>
-  )
-}
-
-const grids = (items: any[]) =>
+const rows = (items: any[]) =>
   items.map((data: any, index: number) => {
     return (
       <div
@@ -50,7 +31,7 @@ const grids = (items: any[]) =>
         </div>
         <div style={{ border: "1px solid gray", flex: 1, padding: "20px 0" }}>
           <span>
-            <Switch value={data.done} id={data.id} />
+            <Switch id={data.id} />
           </span>
         </div>
       </div>
@@ -71,7 +52,7 @@ const VirtualScroll: FC<VirtualScrollProps> = (props) => {
   const rowHeight = 60
   const totalHeight = rowHeight * props.totalElements
   const startNodeEl = Math.max(0, Math.floor(scrollTop / rowHeight))
-  const visibleItems = grids(props.items).slice(
+  const visibleItems = rows(props.items).slice(
     startNodeEl,
     startNodeEl + (props.visibleItemsLength + 2)
   )

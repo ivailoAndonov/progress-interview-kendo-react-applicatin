@@ -1,9 +1,11 @@
 import { faker } from "@faker-js/faker"
 
-const setCompanyList = (length: number) =>
-  [...Array(length).keys()].map((key: number) => {
+let companyList: any[] = []
+
+const generateList = (length: number) => {
+  companyList = [...Array(length).keys()].map((key: number) => {
     return {
-      id: key,
+      id: key + 1,
       name: faker.name.findName(),
       date: faker.date.between(
         "2020-01-01T00:00:00.000Z",
@@ -18,5 +20,16 @@ const setCompanyList = (length: number) =>
       done: faker.datatype.boolean(),
     }
   })
+  return companyList
+}
 
-export const getCompanyList = (length: number) => setCompanyList(length)
+const updateStatus = (id: number, status: boolean) =>
+  (companyList[id].done = status)
+
+const getList = (length: number) =>
+  companyList.length <= 0 ? generateList(length) : companyList
+
+export default {
+  updateCompanyStatus: updateStatus,
+  getCompanyList: getList,
+}

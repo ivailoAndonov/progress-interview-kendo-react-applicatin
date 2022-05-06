@@ -18,18 +18,18 @@ import Select from "../select/Select"
 import "./App.scss"
 
 function App() {
-  const currentTheme = getLocalTheme() || DEFAULT_THEME
-  const currentLocale = getLocalLocale() || DEFAULT_LOCALE
+  const currentTheme: string = getLocalTheme() || DEFAULT_THEME.value
+  const currentLocale: string = getLocalLocale() || DEFAULT_LOCALE.value
 
-  const [theme, setTheme] = useState(currentTheme)
-  const [locale, setLocale] = useState(currentLocale)
+  const [theme, setTheme] = useState<string>(currentTheme)
+  const [locale, setLocale] = useState<string>(currentLocale)
 
-  const handleThemeChange = (value: string) => {
+  const handleThemeChange = (value: string): void => {
     setLocalTheme(value)
     setTheme(value)
   }
 
-  const handleLocaleChange = (value: string) => {
+  const handleLocaleChange = (value: string): void => {
     setLocalLocale(value)
     setLocale(value)
   }

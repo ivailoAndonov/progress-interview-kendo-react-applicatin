@@ -1,7 +1,7 @@
-import React, { FC, useRef, useState, useEffect, ReactElement } from "react"
+import React, { FC, useRef, useState, useEffect } from "react"
 import Switch from "../switch/Switch"
 
-const rows = (items: any[]) =>
+const rows = (items: any[], locale: string) =>
   items.map((data: any, index: number) => {
     return (
       <div
@@ -21,10 +21,15 @@ const rows = (items: any[]) =>
           <span>{data.name}</span>
         </div>
         <div style={{ border: "1px solid gray", flex: 1, padding: "20px 0" }}>
-          <span>{data.date.toString()}</span>
+          <span>{new Intl.DateTimeFormat(locale).format(data.date)}</span>
         </div>
         <div style={{ border: "1px solid gray", flex: 1, padding: "20px 0" }}>
-          <span>{data.revenue}</span>
+          <span>
+            {new Intl.NumberFormat(locale, {
+              style: "currency",
+              currency: "USD",
+            }).format(data.revenue)}
+          </span>
         </div>
         <div style={{ border: "1px solid gray", flex: 1, padding: "20px 0" }}>
           <span>{data.change}</span>
@@ -39,20 +44,21 @@ const rows = (items: any[]) =>
   })
 
 interface VirtualScrollProps {
-  // rowHeight: number
+  rowHeight: number
   totalElements: number
   items: any[]
   visibleItemsLength: number
+  locale: string
 }
 
 const VirtualScroll: FC<VirtualScrollProps> = (props) => {
   const [scrollTop, setScrollTop] = useState(0)
   const scrollEle = useRef<HTMLDivElement | any>(null)
 
-  const rowHeight = 60
-  const totalHeight = rowHeight * props.totalElements
-  const startNodeEl = Math.max(0, Math.floor(scrollTop / rowHeight))
-  const visibleItems = rows(props.items).slice(
+  // const rowHeight = 60
+  const totalHeight = props.rowHeight * props.totalElements
+  const startNodeEl = Math.max(0, Math.floor(scrollTop / props.rowHeight))
+  const visibleItems = rows(props.items, props.locale).slice(
     startNodeEl,
     startNodeEl + (props.visibleItemsLength + 2)
   )
@@ -69,7 +75,7 @@ const VirtualScroll: FC<VirtualScrollProps> = (props) => {
     <div
       ref={scrollEle}
       style={{
-        height: rowHeight * props.visibleItemsLength + "px",
+        height: props.rowHeight * props.visibleItemsLength + "px",
         overflowY: "scroll",
         padding: "0 4px",
         border: "1px solid gray",
@@ -82,7 +88,7 @@ const VirtualScroll: FC<VirtualScrollProps> = (props) => {
       >
         <div
           style={{
-            transform: `translateY(${startNodeEl * rowHeight}px)`,
+            transform: `translateY(${startNodeEl * props.rowHeight}px)`,
           }}
         >
           {visibleItems}

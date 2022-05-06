@@ -7,8 +7,8 @@ type ContextProps = {
   locale: string
 }
 
-const currentTheme: string = getLocalTheme() || DEFAULT_THEME
-const currentLocale: string = getLocalLocale() || DEFAULT_LOCALE
+const currentTheme: string = getLocalTheme() || DEFAULT_THEME.value
+const currentLocale: string = getLocalLocale() || DEFAULT_LOCALE.value
 
 export const AppContext = React.createContext<ContextProps>({
   theme: currentTheme,

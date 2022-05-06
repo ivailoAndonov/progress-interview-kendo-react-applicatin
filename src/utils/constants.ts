@@ -1,9 +1,15 @@
-export const DEFAULT_THEME: string = "light"
+interface Theme {
+  value: string
+}
+export const DEFAULT_THEME: Theme = { value: "light" }
+export const DARK_THEME: Theme = { value: "dark" }
+export const THEMES_LIST: Theme[] = [DEFAULT_THEME, DARK_THEME]
 
-export const DARK_THEME: string = "dark"
-
-export const THEMES_LIST: string[] = [DEFAULT_THEME, DARK_THEME]
-
-export const DEFAULT_LOCALE: string = "en-US"
-
-export const LOCALES_LIST: string[] = [DEFAULT_LOCALE, "BG"]
+interface Locales {
+  value: string
+  name: string
+}
+export const DEFAULT_LOCALE: Locales = { value: "en-US", name: "EN" }
+export const BG_LOCALE: Locales = { value: "BG", name: "BG" }
+export const CN_LOCALE: Locales = { value: "CN", name: "CN" }
+export const LOCALES_LIST: Locales[] = [DEFAULT_LOCALE, BG_LOCALE, CN_LOCALE]

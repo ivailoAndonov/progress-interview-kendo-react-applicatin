@@ -6,14 +6,14 @@ const generateList = (length: number) => {
   companyList = [...Array(length).keys()].map((key: number) => {
     return {
       id: key + 1,
-      name: faker.name.findName(),
+      name: faker.company.companyName(),
       date: faker.date.between(
         "2020-01-01T00:00:00.000Z",
         "2030-01-01T00:00:00.000Z"
       ),
       revenue: faker.finance.amount(1, 10, 2),
       change:
-        Number(faker.datatype.boolean()) +
+        faker.helpers.arrayElements(["+", "-"], 1) +
         " " +
         faker.finance.amount(1, 10, 2) +
         "%",

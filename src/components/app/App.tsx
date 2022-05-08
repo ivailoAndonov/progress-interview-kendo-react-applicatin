@@ -37,10 +37,13 @@ function App() {
   return (
     <AppContext.Provider value={{ theme, locale }}>
       <div className={`App App--${theme}`}>
-        <header className="App__header">Ivaylo interview task</header>
-        <div className="App__table-navigation">
+        <header role="banner" className="App__header">
+          <h1>Ivaylo interview task</h1>
+        </header>
+        <nav role="navigation" className="App__table-navigation">
           <Select
             label="Theme:"
+            ariaLabel="Change application theme"
             options={THEMES_LIST}
             selected={theme}
             changeHandler={handleThemeChange}
@@ -48,11 +51,12 @@ function App() {
           <br />
           <Select
             label="Locale:"
+            ariaLabel="Change application locale"
             options={LOCALES_LIST}
             selected={locale}
             changeHandler={handleLocaleChange}
           />
-        </div>
+        </nav>
         <CompanyTable />
       </div>
     </AppContext.Provider>

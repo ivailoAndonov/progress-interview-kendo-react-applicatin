@@ -1,15 +1,15 @@
-export const setLocalTheme = (theme: string) => {
-  return window.localStorage.setItem("theme", theme)
+export const setLocalTheme = (theme: string): void => {
+  window.localStorage.setItem("theme", theme)
 }
 
-export const getLocalTheme = () => {
+export const getLocalTheme = (): string | null => {
   return window.localStorage.getItem("theme")
 }
 
-export const setLocalLocale = (locale: string) => {
-  return window.localStorage.setItem("locale", locale)
+export const setLocalLocale = (locale: string): void => {
+  window.localStorage.setItem("locale", locale)
 }
 
-export const getLocalLocale = () => {
+export const getLocalLocale = (): string | null => {
   return window.localStorage.getItem("locale")
 }

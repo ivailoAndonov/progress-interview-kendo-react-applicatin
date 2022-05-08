@@ -1,4 +1,19 @@
-const TRANSLATIONS: any = {
+interface Locale {
+  company: string
+  id: string
+  name: string
+  date: string
+  finance: string
+  revenue: string
+  change: string
+  done: string
+}
+
+interface Translations {
+  [key: string]: Locale
+}
+
+const TRANSLATIONS: Translations = {
   "en-US": {
     company: "Company",
     id: "id",
@@ -7,6 +22,7 @@ const TRANSLATIONS: any = {
     finance: "Finance",
     revenue: "Revenue",
     change: "YoY change",
+    done: "Done",
   },
   BG: {
     company: "Компания",
@@ -16,6 +32,7 @@ const TRANSLATIONS: any = {
     finance: "Финанси",
     revenue: "Приходи",
     change: "Годишна промяна",
+    done: "Завършен",
   },
   CN: {
     company: "公司",
@@ -25,7 +42,8 @@ const TRANSLATIONS: any = {
     finance: "金融",
     revenue: "收入",
     change: "年度变化",
+    done: "完毕",
   },
 }
 
-export const translate = (locale: string) => TRANSLATIONS[locale]
+export const translate = (locale: string): Locale => TRANSLATIONS[locale]

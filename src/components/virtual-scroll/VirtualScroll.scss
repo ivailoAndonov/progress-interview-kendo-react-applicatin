@@ -1,0 +1,64 @@
+@use "src/assets/styles/utils/variables";
+
+@mixin slashesBackground($theme) {
+  background: repeating-linear-gradient(
+    -45deg,
+    variables.$light-gray 7px,
+    variables.$light-gray,
+    map-get($theme, "background-color") 10px,
+    map-get($theme, "background-color") 27px
+  );
+}
+
+.VirtualScroll {
+  overflow-y: scroll;
+  padding: 0 4px;
+  border: 1px solid variables.$border-color;
+  border-top: transparent;
+
+  &__row {
+    display: flex;
+
+    & > div:last-child {
+      border-right: none;
+    }
+
+    &--selected-light {
+      @include slashesBackground(variables.$light-theme);
+    }
+    &--selected-dark {
+      @include slashesBackground(variables.$dark-theme);
+    }
+  }
+}
+
+.Cell {
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-right-color: variables.$border-color;
+  border-bottom-color: variables.$border-color;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+
+  &--left {
+    text-align: left;
+  }
+  &--right {
+    text-align: right;
+  }
+
+  &--danger {
+    color: variables.$danger;
+  }
+
+  &--success {
+    color: variables.$success;
+  }
+
+  span {
+    flex: 1;
+    padding: 0 10px;
+  }
+}

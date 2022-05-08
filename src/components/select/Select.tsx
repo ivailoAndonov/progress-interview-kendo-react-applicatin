@@ -9,7 +9,8 @@ interface SelectProps {
   label: string
   selected?: string
   options: Options[]
-  changeHandler: any
+  changeHandler: (value: string) => void
+  ariaLabel: string
 }
 
 const Select: FC<SelectProps> = (props) => {
@@ -24,15 +25,21 @@ const Select: FC<SelectProps> = (props) => {
 
   return (
     <div>
-      <label>{props.label}</label>
-      <br />
-      <select value={value} onChange={(e) => handleChange(e)}>
-        {props.options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.name || option.value}
-          </option>
-        ))}
-      </select>
+      <label>
+        {props.label}
+        <br />
+        <select
+          aria-label={props.ariaLabel}
+          value={value}
+          onChange={(e) => handleChange(e)}
+        >
+          {props.options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.name || option.value}
+            </option>
+          ))}
+        </select>
+      </label>
     </div>
   )
 }

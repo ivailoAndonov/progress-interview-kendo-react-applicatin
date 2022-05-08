@@ -1,15 +1,8 @@
 @use "src/assets/styles/utils/variables";
 
-.CompanyTable--dark {
-  width: 100%;
-}
-.CompanyTable--light {
-  width: 100%;
-}
-
 .TableHeader {
   padding: 6px 4px 0 4px;
-  background-color: #d3d3d3;
+  background-color: variables.$light-gray;
   color: map-get(variables.$light-theme, "color");
 
   &__row {

@@ -1,54 +1,16 @@
 import React, { FC, useRef, useState, useEffect } from "react"
 import { useContext } from "react"
 import { AppContext } from "../../utils/app-context"
-
-import Switch from "../switch/Switch"
-import Cell from "./VirtualScrollCell"
+import { CompanyData } from "../../utils/company-data"
 
 import "./VirtualScroll.scss"
-
-const rows = (
-  items: any[],
-  locale: string,
-  theme: string,
-  rowHeight: number
-) => {
-  const sign = (value: string): string => value[0]
-
-  return items.map((data: any, index: number) => {
-    return (
-      <div
-        className={`VirtualScroll__row ${
-          data.done && "VirtualScroll__row--selected-" + theme
-        }`}
-        style={{ height: `${rowHeight}px` }}
-        key={index}
-      >
-        <Cell>{data.id}</Cell>
-        <Cell align={"left"}>{data.name}</Cell>
-        <Cell>{new Intl.DateTimeFormat(locale).format(data.date)}</Cell>
-        <Cell align={"right"}>
-          {new Intl.NumberFormat(locale, {
-            style: "currency",
-            currency: "USD",
-          }).format(data.revenue)}
-        </Cell>
-        <Cell align={"right"} positive={sign(data.change)}>
-          {data.change}
-        </Cell>
-        <Cell>
-          <Switch id={data.id} checked={data.done} />
-        </Cell>
-      </div>
-    )
-  })
-}
 
 interface VirtualScrollProps {
   rowHeight: number
   totalElements: number
-  items: any[]
+  items: CompanyData[]
   visibleItemsLength: number
+  rows: any
 }
 
 const VirtualScroll: FC<VirtualScrollProps> = (props) => {
@@ -58,20 +20,21 @@ const VirtualScroll: FC<VirtualScrollProps> = (props) => {
 
   const totalHeight = props.rowHeight * props.totalElements
   const startNodeEl = Math.max(0, Math.floor(scrollTop / props.rowHeight))
-  const visibleItems = rows(
-    props.items,
-    appContext.locale,
-    appContext.theme,
-    props.rowHeight
-  ).slice(startNodeEl, startNodeEl + (props.visibleItemsLength + 6))
+
+  const getVisibleItems = () =>
+    props
+      .rows(props.items, appContext.locale, appContext.theme, props.rowHeight)
+      .slice(startNodeEl, startNodeEl + (props.visibleItemsLength + 6))
+
+  let visibleItems = getVisibleItems()
   const scroll = () => {
     setScrollTop(scrollEle.current.scrollTop)
   }
 
   useEffect(() => {
     scrollEle.current.addEventListener("scroll", scroll)
-    return () => {}
-  })
+    visibleItems = getVisibleItems()
+  }, [props.items])
 
   return (
     <div
@@ -87,15 +50,6 @@ const VirtualScroll: FC<VirtualScrollProps> = (props) => {
           }}
         >
           {visibleItems}
-          {/* <div
-            style={{
-              height: "100%",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            loading ...{" "}
-          </div> */}
         </div>
       </div>
     </div>

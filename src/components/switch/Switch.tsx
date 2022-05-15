@@ -1,18 +1,25 @@
-import { FC } from "react"
+import { ChangeEvent, FC, useEffect, useState } from "react"
 
 import "./Switch.scss"
 
+export interface SwitchChangeProps {}
+
 interface SwitchProps {
-  checked?: boolean
-  id: number
-  changeHandler?: (value: string) => void
+  checked: boolean
+  id?: number
+  changeHandler: (value: boolean, id?: number) => void
 }
 
 const Switch: FC<SwitchProps> = (props) => {
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    // props.changeHandler(event.currentTarget.value)
-    console.log(event.target.value)
+  const [checked, setChecked] = useState<boolean>(props.checked)
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    props.changeHandler(props.checked, Number(event.currentTarget.value))
   }
+
+  useEffect(() => {
+    setChecked(props.checked)
+  }, [props.checked])
 
   return (
     <label className="switch">
@@ -20,7 +27,7 @@ const Switch: FC<SwitchProps> = (props) => {
         type="checkbox"
         value={props.id}
         onChange={(e) => handleChange(e)}
-        checked={props.checked}
+        checked={checked}
       />
       <div className="slider round"></div>
     </label>

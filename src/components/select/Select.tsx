@@ -1,4 +1,4 @@
-import { FC, useState } from "react"
+import { ChangeEvent, FC, useState } from "react"
 
 interface Options {
   name?: string
@@ -18,7 +18,7 @@ const Select: FC<SelectProps> = (props) => {
     props.selected || props.options[0].value
   )
 
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>): void => {
+  const handleChange = (event: ChangeEvent<HTMLSelectElement>): void => {
     setValue(event.currentTarget.value)
     props.changeHandler(event.currentTarget.value)
   }

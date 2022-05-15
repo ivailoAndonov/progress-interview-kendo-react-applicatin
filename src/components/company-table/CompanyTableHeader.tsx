@@ -1,12 +1,17 @@
 import { useContext, FC } from "react"
+
 import { AppContext } from "../../utils/app-context"
 import { translate } from "../../utils/translations"
-
 import Switch from "../switch/Switch"
 
 import "./CompanyTable.scss"
 
-const CompanyTableHeader: FC = () => {
+interface CompanyTableHeader {
+  switchHandler: (value: boolean, id?: number) => void
+  globalDone: boolean
+}
+
+const CompanyTableHeader: FC<CompanyTableHeader> = (props) => {
   const appContext = useContext(AppContext)
   const translations = translate(appContext.locale)
 
@@ -39,7 +44,11 @@ const CompanyTableHeader: FC = () => {
         <div className="col-1 border--l">
           <div className="TableHeader__cell border--b">{translations.done}</div>
           <div className="TableHeader__cell">
-            <Switch id={0} checked={false} />
+            <Switch
+              id={0}
+              checked={props.globalDone}
+              changeHandler={props.switchHandler}
+            />
           </div>
         </div>
       </div>

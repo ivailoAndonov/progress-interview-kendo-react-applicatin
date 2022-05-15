@@ -2,7 +2,7 @@ import React from "react"
 import { getLocalLocale, getLocalTheme } from "./app-locals"
 import { DEFAULT_LOCALE, DEFAULT_THEME } from "./constants"
 
-type ContextProps = {
+interface ContextProps {
   theme: string
   locale: string
 }
